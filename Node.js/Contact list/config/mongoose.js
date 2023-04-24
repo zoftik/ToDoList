@@ -1,22 +1,18 @@
-//required LB
-const mongoose = require('mongoose');
+// //require the library
+// const mongoose = require('mongoose');
 
-//connect to DB
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+// //connect to the database
+// mongoose.connect('mongodb://localhost/contact_list_db');
 
-// const Cat = mongoose.model('Cat', { name: String });
+// //acquire the connection(to check if it's successful)
+// const db = mongoose.connection;
 
-// const kitty = new Cat({ name: 'Zildjian' });
-// kitty.save().then(() => console.log('meow'))
+// //error
+// db.on('error', function(err) { console.log(err.message); });
 
+// //up and running then print the message
+// db.once('open', function() {
+  
+//     console.log("Successfully connected to the database");
 
-//acquire the connection(to check if successful)
-const db = mongoose.connection;
-
-//error
-db.on ('error', console.error.bind(console, 'error connecting to db'));
-
-//up and running then print
-db.once('open', function(){
-    console.log('succesfully connected to database');
-});
+// });

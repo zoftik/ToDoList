@@ -13,7 +13,6 @@ app.use(express.urlencoded());
 app.use(express.static('assets'));
 
 
-
 var contactList = [
     {
         name: "Arpan",
@@ -29,37 +28,48 @@ var contactList = [
     }
 ]
 
-app.get('/practice', function(req, res){
+app.get('/practice', function (req, res) {
     return res.render('practice', {
         title: "Let us play with ejs"
     });
 });
 
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
 
-    return res.render('home',{
-        title: "Contact List",
-        contact_list: contactList
-    });
+
+    Contact.find({}, function (err, contacts) {
+        if (err) {
+            console.log("error in fetching contacts from db");
+            return;
+        }
+        return res.render('home', {
+            title: "Contact List",
+            contact_list: contacts
+        });
+
+    })
+
 })
-app.post('/create-contact', function(req, res){
-    
-    
+app.post('/create-contact', function (req, res) {
+
+
     Contact.create({
         name: req.body.name,
-        phone: req.body.name
-    }, function(err, newContact){
-        if(err){console.log('Error in creating a contact!')
-            return;}
-            console.log('******', newContact);
-            return res.redirect('back');
+        phone: req.body.phone
+    }, function (err, newContact) {
+        if (err) {
+            console.log('Error in creating a contact!')
+            return;
+        }
+        console.log('******', newContact);
+        return res.redirect('back');
     })
-  
+
 
 });
 
-app.listen(port, function(err){
+app.listen(port, function (err) {
     if (err) {
         console.log("Error in running the server", err);
     }
@@ -67,15 +77,18 @@ app.listen(port, function(err){
 })
 
 
-app.get('/delete-contact/', function(req, res){
+app.get('/delete-contact/', function (req, res) {
     console.log(req.query);
-    let phone = req.query.phone
+    let id = req.query.id
 
-    let contactindex = contactList.findIndex(contact => contact.phone == phone);
+    Contact.findOneAndDelete(id, function (err) {
+        if (err) {
+            console.log('error in deleting the object');
+            return;
+        }
+        return res.redirect('back');
+    })
 
-    if(contactindex != -1){
-        contactList.splice(contactindex, 1);
-    }
 
-    return res.redirect('back');
+
 });
