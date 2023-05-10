@@ -1,4 +1,12 @@
-// import {link} from 'react-router-dom'
+// import { createRoot } from 'react-dom/client';
+
+// // Clear the existing HTML content
+// document.body.innerHTML = '<div id="app"></div>';
+
+// // Render your React component instead
+// const root = createRoot(document.getElementById('app'));
+// root.render(<h1>Hello, world</h1>);
+
 
 /**JavaScript */
 // const heading = document.createElement('h2');
@@ -15,7 +23,23 @@
 
 /**React With JSX */
 
-const jsxHeading = (<h1>Hello World JSX</h1>);
+const jsxHeading =<>
+    {/* <React.Fragment> */}
+    <h1>About React</h1>
+    <p>
+        <li>
+            lorem
+        </li>
+        <li>
+            lorem
+        </li>
+        <li>
+            lorem
+        </li>
+    </p>
+    {/* </React.Fragment> */}
+    </>
+    ;
 ReactDOM.createRoot(document.getElementById("root")).render(jsxHeading);
 
 
